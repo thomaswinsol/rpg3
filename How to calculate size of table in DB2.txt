@@ -1,0 +1,4 @@
+SELECT table_name, NUMBER_ROWS, DATA_SIZE FROM qsys2.systablestat 
+WHERE 
+TABLE_SCHEMA ='OORDLIB' 
+order by data_size desc
