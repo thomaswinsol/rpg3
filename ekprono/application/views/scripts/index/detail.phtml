@@ -1,0 +1,245 @@
+<?php
+$this->placeholder('mainTitle')->set($this->ShowMessages($this->flashMessenger));
+?>
+<?php 
+$ii=0;
+$totaalscore=0;
+if (!empty($this->result)){
+?>
+<div class="hoofding" style="margin-top:5px;"><?php echo $this->deelnemer['naam'];?> </div>
+<br/>
+<table  class="gridtable" style="width:50%;margin-left:25%;font-size:10px;">
+	<thead>
+	<tr>
+		<th>
+			<?php echo $this->translate('Nr'); ?>
+		</th>
+		<th>
+			<?php echo $this->translate('Wedstrijd'); ?>
+		</th>               
+		<th>
+			<?php echo $this->translate('Uitslag'); ?>
+		</th>
+		<th>
+			<?php echo $this->translate('Prono'); ?>
+		</th>
+		<th>
+			<?php echo $this->translate('Score'); ?>
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+        <?php foreach ($this->result as $r) { ?>
+        <?php $ii++;?>
+        <?php $totaalscore+=$r['score'];?>
+	<tr>
+        <td align='center'>
+                    <?php echo $r['wid']; ?>    
+		</td>
+		<td>
+                    <?php echo $r['thuis']; ?>-<?php echo $r['uit']; ?>   
+		</td>
+		<td align='center'>
+                    <?php echo $r['uitslag']; ?>    
+		</td>
+		<td align='center'>
+                    <?php echo $r['input1']; ?>-<?php echo $r['input2']; ?>   
+		</td>
+		<td align='right'>
+                    <?php echo $r['score']; ?>    
+		</td>
+	</tr>	
+        <?php }
+        ?>
+	</tbody>
+		<?php 
+			if ($ii>0) {	
+		?>	
+		<tfoot>
+			<tr>
+			<th colspan=4></th>
+			<th><span style="color:blue;font-size:14px;"><?php echo trim($totaalscore); ?></span></th>
+			</tr>
+		</tfoot>
+		<?php 
+			}		
+		?>
+	</table>
+<?php 	
+}
+?>
+
+<?php 
+//-------------------------------------------------------------------------------------
+$ii=0;
+$totaalscore=0;
+if (!empty($this->result2)){
+?>
+<br/>
+<table  class="gridtable" style="width:50%;margin-left:25%;font-size:10px;">
+	<thead>
+	<tr>
+		<th>
+			<?php echo $this->translate('Finales'); ?>
+		</th>               
+		<th>
+			<?php echo $this->translate('Score'); ?>
+		</th>
+	</tr>
+	</thead>
+	<tbody>
+		<?php $ii=0;?>
+        <?php foreach ($this->result2 as $r) { ?>
+        <?php $ii++;?>
+        <?php $totaalscore+=$r['score'];?>
+        <?php if ($r['groep'] <> 12 ) { ?>
+	<tr>
+		<td>
+                    <?php echo $this->finales[$r['groep']]; ?>
+		</td>
+		<td align='right'>
+                    <?php echo $r['score']; ?>    
+		</td>
+	</tr>	
+        <?php } ?>
+        <?php }
+        ?>
+	</tbody>
+		<?php 
+			if ($ii>0) {	
+		?>	
+		<tfoot>
+			<tr>
+			<th></th>
+			<th><span style="color:blue;font-size:14px;"><?php echo $totaalscore; ?></span></th>
+			</tr>
+		</tfoot>
+		<?php 
+			}		
+		?>
+	</table>
+<?php 	
+}
+?>
+<p></p>
+<?php //echo $this->deelnemer['email'];?>
+<br/>
+
+<form name="ekprono" id="ekprono" method="post" action="/index/prono">
+<table  class="gridProno" width="870" cellspacing="5" cellpadding="5" border="0">
+	<tbody>
+		<tr>
+		<td width="50%" valign="top">
+			<label><?php echo $this->translate('Naam'); ?>:</label> <?php echo $this->deelnemer['naam'];?>
+		</td>
+		<td width="50%" valign="top">
+			<label></label> <?php //echo $this->deelnemer['email'];?>
+		</td>
+		</tr>
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->wedstrijden,1,$this->deelnemerinput, $this->mail); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->wedstrijden,2,$this->deelnemerinput, $this->mail); ?>
+		</td>
+		</tr>
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->wedstrijden,3,$this->deelnemerinput, $this->mail); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->wedstrijden,4,$this->deelnemerinput, $this->mail); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->wedstrijden,5,$this->deelnemerinput, $this->mail); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->wedstrijden,6,$this->deelnemerinput, $this->mail); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->wedstrijden,7,$this->deelnemerinput, $this->mail); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->wedstrijden,8,$this->deelnemerinput, $this->mail); ?>
+		</td>
+		</tr>
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden2(8,$this->ploegen,$this->wedstrijden[9],$this->deelnemerinput); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden2(4,$this->ploegen,$this->wedstrijden[10],$this->deelnemerinput); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden2(2,$this->ploegen,$this->wedstrijden[11],$this->deelnemerinput); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden2(1,$this->ploegen,$this->wedstrijden[12],$this->deelnemerinput); ?>
+		</td>
+		</tr>
+		              
+
+		<tr>
+		<td colspan="2" valign="top">
+			<div class="hoofding"><?php echo $this->translate('Winnaar'); ?></div>
+			<div class="groep">
+			<table width="100%" cellspacing="1" cellpadding="1" border="0">
+				<tbody>
+				<tr>
+				<td align='center'>
+				<?php 
+				if (substr($this->ploegen[$this->deelnemerinput['52']['input1']],0,1)=='*') {
+			 			echo "<span style='text-decoration:line-through;color:red;'> ".substr($this->ploegen[$this->deelnemerinput['52']['input1']],1,30)."</span>";
+			 		}
+			 		else {
+			 			echo $this->ploegen[$this->deelnemerinput['52']['input1']];
+			 		}
+			 	?>	
+				</td>
+				</tr>
+				</tbody>
+			</table>
+			</div>
+			</div>
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<div class="hoofding"><?php echo $this->translate('Aantal doelpunten gescoord tijdens het hele EK'); ?></div>
+			<div class="groep">
+			<table width="100%" cellspacing="1" cellpadding="1" border="0">
+				<tbody>
+				<tr>
+				<td align='center'><?php echo $this->deelnemerinput['53']['input1']; ?></td>
+				</tr>
+				</tbody>
+			</table>
+			</div>
+			</div>			
+		</td>
+		</tr>
+	</tbody>
+</table>
+
+</form>
+<p>---</p>
+<div id="divLoading"></div>
+<div id="messages"></div>
+<?php echo $this->render('/index/_jsCustom_prono.phtml'); ?>

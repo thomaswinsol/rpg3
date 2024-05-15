@@ -1,0 +1,88 @@
+<!doctype>
+<?php
+header('Content-Type: text/html; charset=utf-8');
+echo '<?xml version="1.0" encoding="UTF-8" ?>'.PHP_EOL;
+echo $this->doctype().PHP_EOL; ?>
+<html>    
+    <head>
+    <?php //echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/style.css').PHP_EOL; ?>
+
+        <title><?php echo $this->translate('Pronostiek EK'); ?></title>
+        <?php echo $this->headLink()->prependStylesheet($this->baseUrl().'/css/style.css?version=2').PHP_EOL; ?>
+        <?php
+            echo $this->jQuery().PHP_EOL;
+            echo $this->headScript();
+        ?>
+    </head>
+    
+    <body>        
+        <section id="container">
+            <aside>
+                <h3 class="hidden">Dit is de linkermarge van de webpagina</h3>
+               
+                <section class="logo">
+                 <figure style="margin-left:5px;">
+                        <img src="<?php echo $this->baseUrl().'/images/euro-2024-logo.png'; ?>" alt="Logo" width="200">
+                        <figcaption>Logo</figcaption>
+                 </figure>
+                 <figure style="margin-top:40px;margin-left:5px;display:none;">
+                        <img src="<?php echo $this->baseUrl().'/images/albart2.png'; ?>" alt="Logo" width="110%">
+                        <figcaption>Logo2</figcaption>
+                 </figure>
+                 <figure style="margin-top:30px;margin-left:5px;display:none;">
+                        <img src="<?php echo $this->baseUrl().'/images/albart.png'; ?>" alt="Logo" width="200">
+                        <figcaption>Logo2</figcaption>
+                 </figure>  
+                </section>
+                <br/>              
+            </aside>
+
+            <header>
+            	 <h1 class="hidden">EK Prono</h1> 
+            	 <section>
+            	 <div class="titel" style="float:left;width:15%;text-align:left;margin-left:5%;">
+            	 <h2 style="text-align:left;"><?php echo $this->translate('EK Prono'); ?></h2>  
+            	 </div>
+            	 <div style="float:left;">            	   
+                 	<section class="lang">
+                 	<h3 class="hidden">Taalkeuze</h3>
+                       <?php echo $this->toonLocale(); ?>
+                 	</section>   
+                 </div>	         	 
+            	 </section>
+                             
+                 <nav>
+                    <h3 class="hidden">Dit is de navigatie van de website</h3>
+                    <?php
+                    $partial = array('menu.phtml', 'default');
+                    $this->navigation()->menu()->setPartial($partial);
+                    ?>                    
+                    <?php echo $this->navigation()->menu()->addPageClassToLi(true); ?>
+                    <br />
+                </nav>
+                                
+                <section class="login">
+                 <h3 class="hidden">Loginformulier</h3>
+                       <?php //echo $this->signupForm($this->signupForm); ?>
+                </section>
+
+            </header>
+
+            <section id="content">
+                <h2 class="hidden">De content...</h2>
+                <section id="mainTitle">
+                <h3 class="hidden">Error messages</h3>
+                       <?php echo $this->placeholder('mainTitle') ?>
+                </section>
+                <?php echo $this->layout()->content; ?>
+            </section>
+
+            <footer>
+                <h3 class="hidden">De footer...</h3>
+            </footer>
+
+        </section>
+    </body>
+</html>
+
+

@@ -1,0 +1,69 @@
+SELECT tblFin.*, tblDatums.odatbo AS Boekdatum, tblDatums.odatpr AS StartDatumProductie,
+    tblDatums.odatlv AS DatumGewenstKlant, tblDatums.odatvl AS VoorzieneDatumMagazijn,
+    tblDatums.odatma AS MagazijnDatum, tblDatums.ipdate AS DatumInitieelVoorzienVertrek,
+    tblDatums.plavle AS DatumVoorzienVertrek, tblDatums.odatle AS DatumVertrek, tblDatums.wdatpp
+    AS geplandePlaatsing, tblDatums.odatui AS datumuitvoering, tblDatums.odate1 AS Factuurdatum,
+    tblDatums.klachtnr
+    FROM (SELECT tblVerkStat.*, tblKlant.kregio AS RegioCode, tblReg.REGPNN AS Regio,
+               tblKlant.Knat AS NationaliteitCode, tblNat.oms_natn AS Nationaliteit,
+               tblKlant.kaard AS KlantAardCode, tblAard.aomscn AS KlantAard, tblvert.vnaam,
+               tblvert.vertnr,
+               CASE
+                   WHEN tblVerkStat.land = ?
+                       THEN
+                           CASE
+                               WHEN TblVert.vertnr IN (?, ?, ?, ?, ?, ?, ?)
+                                   THEN ?
+                                   ELSE ?
+                           END ELSE
+                               CASE
+                                   WHEN tblVerkStat.groep2 = ?
+                                       THEN
+                                           CASE
+                                               WHEN tblVert.vbank = ?
+                                                  THEN ?
+                                                  ELSE ?
+                                           END
+                                   WHEN tblVerkStat.groep2 = ?
+                                       THEN
+                                           CASE
+                                               WHEN tblKlant.Knat = ?
+                                                  THEN
+                                                  CASE
+                                                  WHEN TblVert.vertnr IN (?, ?, ?, ?, ?, ?, ?)
+                                                  THEN ?
+                                                  ELSE ?
+                                                  END ELSE ?
+                                           END
+                                   WHEN tblVerkStat.groep2 = ?
+                                       THEN ?
+                                   WHEN tblVerkStat.groep2 = ?
+                                           THEN ?when tblVerkStat.groep2 = ?
+                                               THEN ?
+                                   WHEN tblVerkStat.groep2 = ?
+                                           THEN ?
+                                   WHEN tblVerkStat.groep2 = ?
+                                           THEN ? ELSE ?
+                               END END AS Kanaal FROM xls.pfxlsor tblVerkStat LEFT JOIN
+                                   ODIVERS.PFVERT TblVert ON tblVerkStat.overtg = TblVert.Vertnr
+                                   LEFT JOIN
+                                   (SELECT kklnr, kaard, knaam1, knat , kregio, kpostn, kgem
+                                        FROM wvdj.pfklan)
+                           AS tblKlant ON tblVerkStat.OKLNR = tblKlant.kklnr LEFT JOIN
+                               odivers.pfregio tblReg ON tblKlant.kregio = tblReg.regio LEFT JOIN
+                               (SELECT ko_nat , oms_natn , oms_natf
+                                    FROM winsolpro.pfnat)
+                           AS tblNat ON tblKlant.knat = tblNat.ko_nat LEFT JOIN
+                               (SELECT akode , aomscn , aomscf
+                                    FROM winsolpro.PFAARD)
+                           AS tblAard ON tblKlant.kaard = tblAard.akode LEFT JOIN
+                               (SELECT *
+                                    FROM WVDJ.PFGRKLA)
+                           AS tblKlGr ON tblVerkStat.OKLNR = tblKLGr.GRKLNR LEFT JOIN
+                               (SELECT *
+                                    FROM winsolpro.pfvprs)
+                           AS tblCreatie ON tblVerkStat.OKLNR = tblCreatie.prnr WHERE jaar >= ?)
+    tblFin LEFT
+    JOIN oordlib.orderall tblDatums ON tblFin.order = tblDatums.oornr
+    WHERE tblFin.kanaal = ? AND regiocode = ?;
+-------------------------------------------------------------------------------------------------------------------

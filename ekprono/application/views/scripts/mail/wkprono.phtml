@@ -1,0 +1,144 @@
+<!doctype>
+<?php
+header('Content-Type: text/html; charset=utf-8');
+echo '<?xml version="1.0" encoding="UTF-8" ?>'.PHP_EOL; 
+echo $this->doctype().PHP_EOL; ?>
+<html>
+<head>
+<style>
+.groep {
+    background-color: #FFFFFF;
+    border-color: #000099;
+    border-style: solid;
+    border-width: 1px;
+    color: #000000;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+}
+
+.hoofding {
+    background-color: #000099;
+    border-color: #6600CC;
+    border-style: solid;
+    border-width: 1px;
+    color: #FFFFFF;
+    font-weight: bold;
+    margin: 0;
+    text-align: center;
+}
+</style>
+</head>
+
+<body>
+<table width="870" cellspacing="5" cellpadding="5" border="0">
+	<tbody>
+		<tr>
+		<td width="50%" valign="top">
+			<label>Naam:</label> <?php echo $this->data[0]['naam'];?>
+		</td>
+		<td width="50%" valign="top">
+			<label>E-mail:</label> <?php echo $this->data[0]['email'];?>
+		</td>
+		</tr>
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->data[3],1,$this->data[1],1); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->data[3],2,$this->data[1],1); ?>
+		</td>
+		</tr>
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->data[3],3,$this->data[1],1); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->data[3],4,$this->data[1],1); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->data[3],5,$this->data[1],1); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->data[3],6,$this->data[1],1); ?>
+		</td>
+		</tr>
+                
+                <tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->data[3],7,$this->data[1],1); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden2($this->data[3],8,$this->data[1],1); ?>
+		</td>
+		</tr>
+
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden2(8,$this->data[2],$this->data[3][9],$this->data[1]); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden2(4,$this->data[2],$this->data[3][10],$this->data[1]); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden2(2,$this->data[2],$this->data[3][11],$this->data[1]); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden2(1,$this->data[2],$this->data[3][12],$this->data[1]); ?>
+		</td>
+		</tr>
+                    
+                <tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden2(0,$this->data[2],$this->data[3][13],$this->data[1]); ?>
+		</td>
+		</tr> 
+                
+		<tr>
+		<td colspan="2" valign="top">
+			<div class="hoofding">Winnaar</div>
+			<div class="groep">
+			<table width="100%" cellspacing="1" cellpadding="1" border="0">
+				<tbody>
+				<tr>
+				<td align='center'><?php echo $this->data[2][$this->data[1]['65']['input1']]; ?></td>
+				</tr>
+				</tbody>
+			</table>
+			</div>
+			</div>
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<div class="hoofding">Aantal doelpunten gescoord tijdens het hele WK</div>
+			<div class="groep">
+			<table width="100%" cellspacing="1" cellpadding="1" border="0">
+				<tbody>
+				<tr>
+				<td align='center'><?php echo $this->data[1]['66']['input1']; ?></td>
+				</tr>
+				</tbody>
+			</table>
+			</div>
+			</div>			
+		</td>
+		</tr>
+	</tbody>
+</table>
+</body>
+</html>
+

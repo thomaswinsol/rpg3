@@ -1,0 +1,43 @@
+<?php
+$this->jQuery()->onLoadCaptureStart(); ?>
+
+        $(document).on("keyup", ".onlyDecimals", function() {
+            var newValue = $(this).val().replace(/[^0-9\.,]/g,'');
+            $(this).val(newValue);
+        });     
+           
+        
+         // btn_save
+     $(document).on("click", "#Opslaan", function(event) {
+     	 event.preventDefault();
+         $("#divLoading").html('<img src="<?php echo $this->baseUrl();?>/base/images/icons/loader_02.gif" /><BR> Loading, please wait...');
+         $("#Opslaan").hide();
+         var myForm   =  $(this).closest('form');
+         var formId =  myForm.attr('id');   
+	     var formdata   = $('#'+formId).serialize(); //retrieve all form elements
+         formdata += '&'+$(this).attr('name')+'=1'; //otherwise button is not in data
+     	 $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "<?php echo $this->baseUrl() . '/admin/ajax-save-ploeg'; ?>",
+          dataType: "html",         
+          data: {data: formdata },
+          success: function(html){    
+          			var strArray = html.split(":::");   		   		         
+                	if (strArray[0] == '0') { 
+                   		location.href="<?php echo $this->baseUrl() . '/admin/ploegen/'; ?>";
+                	} 
+                	else {
+                		alert("<?php echo $this->translate('Formuliervalidatie mislukt!');?>"); 
+                		$("#messages").html(strArray[1]);   
+                		$("#Opslaan").show();            		  
+                	}                   	                     	
+                	$("#divLoading").html(''); 
+                	          	       
+          		}          		
+          });
+      });  
+      
+<?php 
+$this->jQuery()->onLoadCaptureEnd();
+?>

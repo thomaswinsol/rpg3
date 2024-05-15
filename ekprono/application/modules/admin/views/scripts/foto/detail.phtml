@@ -1,0 +1,7 @@
+<h1><?php echo $this->translate("lblFoto"); ?>:</h1>
+<div id="productform">
+<?php echo $this->form; ?>
+</div>
+<?php if (!empty($this->foto)) { ?>
+<img height="120" src="<?php echo "/".$this->escape($this->foto['filePath']).$this->escape($this->foto['fileName']); ?>"><br/>
+<?php } ?>

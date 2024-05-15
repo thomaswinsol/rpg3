@@ -1,0 +1,119 @@
+<?php
+$this->placeholder('mainTitle')->set($this->ShowMessages($this->flashMessenger));
+?>
+<form name="ekprono" id="ekprono" method="post" action="/index/prono">
+<table width="920" cellspacing="5" cellpadding="5" border="0">
+	<tbody>
+		<tr>
+		<td width="50%" valign="top">
+			<label><?php echo $this->translate("Naam");?>:</label> <?php echo $this->deelnemer['naam']; ?>
+		</td>
+		<td width="50%" valign="top">
+			<label>E-mail:</label> <?php echo $this->deelnemer['email']; ?>
+		</td>
+		</tr>
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,1,1,1,$this->deelnemerinput); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,2,1,1,$this->deelnemerinput); ?>
+		</td>
+		</tr>
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,3,1,1,$this->deelnemerinput); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,4,1,1,$this->deelnemerinput); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,5,1,1,$this->deelnemerinput); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,6,1,1,$this->deelnemerinput); ?>
+		</td>
+		</tr>
+		
+                <tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,7,1,1,$this->deelnemerinput); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,8,1,1,$this->deelnemerinput); ?>
+		</td>
+		</tr>
+				
+                <tr>
+		<td width="50%" valign="top" colspan="2">
+                    Klik <a href="#" class="standing"><span style="text-decoration:underline;font-size:14px;">hier</span></a> om de stand van de groep op te vragen.
+                </td>		
+		</tr>
+                
+                <tr>
+		<td width="50%" valign="top" colspan="2">
+                    <div id="divLoading2"></div>
+                </td>		
+		</tr>
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden(8,$this->ploegen,$this->wedstrijden[9],$this->deelnemerinput); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden(4,$this->ploegen2,$this->wedstrijden[10],$this->deelnemerinput); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden(2,null,$this->wedstrijden[11],$this->deelnemerinput); ?>
+		</td>
+		</tr>
+                
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden(1,null,$this->wedstrijden[12],$this->deelnemerinput); ?>
+		</td>
+		</tr>
+                
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijden(0,null,$this->wedstrijden[13],$this->deelnemerinput); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td colspan="2" valign="top">
+			<?php echo $this->GetFinaleWedstrijd(1,$this->wedstrijden[14]); ?>
+		</td>
+		</tr>
+		
+		
+		
+		<tr>
+		<td colspan="2" valign="top" style="text-align:center;">
+			<?php echo $this->GetSchiftingsvraag(1); ?>
+		</td>
+		</tr>
+                
+                <tr>
+                <td colspan="2" valign="top" style="text-align:center;">
+                <input type="submit" value="<?php echo $this->translate('Wijzigen prono'); ?>" name="btn_save" id="btn_save">
+                </td>                
+                </tr>
+		
+	</tbody>
+</table>
+</form>
+<br/>
+<br/>
+<div id="divLoading"></div>
+<div id="messages"></div>
+<?php echo $this->render('index/_jsCustom_prono.phtml'); ?>

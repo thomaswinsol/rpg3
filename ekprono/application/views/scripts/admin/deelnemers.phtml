@@ -1,0 +1,64 @@
+<?php 
+$ii=0;
+if (!empty($this->result)){
+	$img="<img src='".$this->baseUrl()."/required-field.png"."'>";
+?>
+
+<?php if (!empty($this->form)) {
+	       echo $this->form;
+		}
+?>
+<br/>
+<div class="deelnemers">
+<div class="hoofding"><?php echo $this->translate('Deelnemers');?></div>
+<br/>
+<table   class="gridtable">
+	<thead>
+	<tr>
+		<th>
+			<?php echo $this->translate('Nr'); ?>
+		</th>
+		<th>
+			<?php echo $this->translate('Naam'); ?>
+		</th>                
+		<th>
+			<?php echo $this->translate('Afdeling'); ?>
+		</th>
+		<th>
+			<?php echo $this->translate('Betaald?'); ?>
+		</th>
+		<th>
+			<?php echo $this->translate('Tijdstip inschrijving'); ?>
+		</th>	
+	</tr>
+	</thead>
+	<tbody>
+        <?php foreach ($this->result as $r) { ?>
+        <?php $ii++;?>
+	<tr>
+		<td>
+                    <?php echo $ii; ?>    
+		</td>
+		<td>
+			<a href="<?php echo $this->baseUrl();?>/admin/deelnemers/id/<?php echo $r['id']; ?>"><?php echo $r['naam']; ?></a>   
+		</td>
+        <td>
+                    <?php echo $r['naamafdeling']; ?>    
+		</td>
+		<td align='center'>							
+                    <?php echo ($r['betaald'])?$img:""; ?>    
+		</td>
+		<td>							
+                    <?php echo $r['timestamp']; ?>  
+		</td>
+	</tr>
+        <?php } ?>
+	</tbody>	
+</table>
+</div>
+<?php 
+}
+?>
+<div id="messages"></div>
+<div id="divLoading"></div>
+<?php echo $this->render('/admin/_jsCustom_deelnemer.phtml'); ?>

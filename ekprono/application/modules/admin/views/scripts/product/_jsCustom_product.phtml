@@ -1,0 +1,28 @@
+<?php
+// ---------------------------------
+// JAVASCRIPT
+// --------------------------------- 
+$this->jQuery()->onLoadCaptureStart(); ?>
+        
+        $(document).on("keyup", ".onlyDecimals", function() {
+            var newValue = $(this).val().replace(/[^0-9\.,]/g,'');
+            $(this).val(newValue);
+        });
+
+        // Autocomplete foto
+        $[ "ui" ][ "autocomplete" ].prototype["_renderItem"] = function( ul, item) {
+            return $( "<li></li>" )
+            .data( "item.autocomplete", item )
+            .append( $( "<a></a>" ).html( item.label ) )
+            .appendTo( ul );
+        };
+
+         $("#AutocompleteC").focus(function(event) {
+            if ($(this).val().length == 0) {
+                $(this).autocomplete("search");
+            }
+      });
+
+<?php 
+$this->jQuery()->onLoadCaptureEnd();
+?>

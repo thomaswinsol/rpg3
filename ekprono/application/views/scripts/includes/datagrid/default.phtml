@@ -1,0 +1,9 @@
+<?php 
+echo $this->headLink()->prependStylesheet('/base/datagrid/styles/default.css');
+?>
+<h1><?php echo $this->translate("lblUwBestellingen"); ?></h1>
+<div style="margin-left:25px; width:875px;overflow:auto;">
+    <?php
+        echo $this->dataGrid;
+    ?>
+</div>

@@ -1,0 +1,52 @@
+1	Rusland	Saoudi-Arabië	1	14/06	17:00		 
+2	Egypte	Uruguay	1	15/06	14:00		 
+3	Marokko	Iran	2	15/06	17:00		 
+4	Portugal	Spanje	2	15/06	19:00		 
+5	Frankrijk	Australië	3	16/06	12:00		 
+6	Argentinië	Ijsland	4	16/06	15:00		 
+7	Peru	Denemarken	3	16/06	18:00		 
+8	Kroatië	Nigeria	4	16/06	21:00		 
+9	Costa Rica	Servië	5	17/06	14:00		 
+10	Duitsland	Mexico	6	17/06	17:00		 
+11	Brazilië	Zwitserland	5	17/06	20:00		 
+12	Zweden	Zuid-Korea	6	18/06	14:00		 
+13	België	Panama	7	18/06	17:00		 
+14	Tunesië	Engeland	7	18/06	20:00		 
+15	Polen	Senegal	8	19/06	14:00		 
+16	Colombia	Japan	8	19/06	17:00		 
+17	Rusland	Egypte	1	19/06	20:00		 
+18	Portugal	Marokko	2	20/06	14:00		 
+19	Uruguay	Saoudi-Arabië	1	20/06	17:00		 
+20	Iran	Spanje	2	20/06	20:00		 
+21	Frankrijk	Peru	3	21/06	14:00		 
+22	Denemarken	Australië	3	21/06	17:00		 
+23	Argentinië	Kroatië	4	21/06	20:00		 
+24	Brazilië	Costa Rica	5	22/06	14:00		 
+25	Nigeria	Ijsland	4	22/06	20:00		 
+26	Servië	Zwitserland	5	22/06	21:00		 
+27	België	Tunesië	7	23/06	14:00		 
+28	Duitsland	Zweden	6	23/06	17:00		 
+29	Zuid-Korea	Mexico	6	23/06	20:00		 
+30	Engeland	Panama	7	24/06	14:00		 
+31	Japan 	Senegal	8	24/06	17:00		 
+32	Polen	Colombia	8	24/06	20:00		 
+33	Uruguay	Rusland	1	25/06	14:00		 
+34	Saoudi-Arabië	Egypte	1	25/06	17:00		 
+35	Iran	Portugal	2	25/06	20:00		 
+36	Spanje	Marokko	2	25/06	20:00		 
+37	Denemarken	Frankrijk	3	26/06	16:00		
+38	Australië	Peru	3	26/06	16:00		
+39	Nigeria 	Argentinië	4	26/06	20:00		
+40	IJsland 	Kroatië	4	26/06	20:00		
+41	Zuid-Korea	Duitsland	5	27/06	16:00		
+42	Mexico	Zweden	5	27/06	16:00		
+43	Servië	Brazilië	6	27/06	20:00		
+44	Zwitserland	Costa Rica	6	27/06	20:00		
+45	Japan	Polen	8	28/06	16:00		
+46	Senegal	Colombia	8	28/06	16:00		
+47	Engeland	België	7	28/06	20:00		
+48	Panama	Tunesië	7	28/06	20:00		
+49	45	46	11	06/07	21:00		
+50	47	48	11	07/07	21:00		
+51	49	50	12	10/07	21:00		
+52			13				

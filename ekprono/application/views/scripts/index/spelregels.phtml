@@ -1,0 +1,140 @@
+<?php
+$this->placeholder('mainTitle')->set($this->ShowMessages($this->flashMessenger));
+?>
+<style>
+.speech-bubble {
+	position: relative;
+	background: #d3d3d3;
+	border-radius: .4em;
+}
+#content{
+    width:85%;
+}
+fieldset{
+    background-color:#d3d3d3;
+    border-color:#d3d3d3;
+    width:80% !important;
+}
+legend {
+    padding-bottom:5px;
+}
+
+.speech-bubble:after {
+	content: '';
+	position: absolute;
+	left: 0;
+	top: 0%;
+	width: 0;
+	height: 0;
+	border: 43px solid transparent;
+	border-right-color: #d3d3d3;
+	border-left: 0;
+	margin-top: -27px;
+	margin-left: -43px;
+}
+</style>
+
+
+
+<div style="clear:both;"></div>
+<div style="float:left;margin-left:15%;">
+<img src="<?php echo $this->baseUrl().'/images/albart.png'; ?>" alt="Logo" width="150">
+</div>
+<div class="spelregels1" style="float:right;">
+<fieldset style="margin:10px;text-align:left;padding:2%;">
+<legend style="font-size:16px;"><?php echo $this->translate('Spelregels'); ?></legend>
+
+<div class="speech-bubble">
+<h3>
+<u>Puntenverdeling:</u>
+<br/>
+<?php echo $this->translate('In drie onderdelen zijn er punten te winnen.'); ?></h3>
+<ol>
+<li>
+<strong>  <?php echo $this->translate('Voorspel uitslagen'); ?></strong>
+<ul>
+<?php //echo $this->translate('7 punten indien je de uitslag correct voorspeld hebt'); ?>
+<li>10 punten: Je voorspelt de exacte uitslag van de wedstrijd.</li>
+<li> 7 punten: Je uitslag van de wedstrijd is fout, maar je doelsaldo klopt wel.<br/>(Voorbeeld: Je voorspelt 3-1 en het wordt 2-0)</li>
+<li> 5 punten: Als je de winnaar, de verliezer of het gelijkspel voorspeld had.</li>
+</ul>
+</li>
+<li>
+<strong>  <?php echo $this->translate('Wie gaat verder'); ?></strong>
+<ul>
+<li><?php echo $this->translate('15 punten voor iedere voorspelde achtste finalist'); ?> </li>
+<li><?php echo $this->translate('20 punten voor iedere voorspelde kwartfinalist'); ?></li>
+<li><?php echo $this->translate('25 punten voor iedere voorspelde halve finalist'); ?></li>
+<li><?php echo $this->translate('30 punten voor iedere voorspelde finalist'); ?></li>
+<li><?php echo $this->translate('50 punten indien je de Europees Kampioen voorspelde'); ?></li>
+
+</ul>
+</li>
+<li>
+<strong>De schiftingsvraag:<?php echo $this->translate('Het aantal doelpunten'); ?></strong>
+<ul>
+<?php echo $this->translate('Als je het aantal doelpunten correct voorspelt, krijg je 25 punten. <br/>Per goal afwijking gaat er een punt af.'); ?>
+<br>
+<?php echo $this->translate('De strafschoppen na de verlengingen tellen niet mee als doelpunten.'); ?>
+</ul>
+</li>
+</ol>
+
+<br/>
+
+<h3>
+<u>Deelnemen:</u>
+<h3>
+Het formulier dient volledig ingevuld te worden, na indienen is het niet meer mogelijk om nog wijzigingen aan te brengen.<br/>
+<?php echo $this->translate('Deelname bedraagt 5 euro.'); ?>
+<br/>
+Je kan deelnemen aan de pronostiek t.e.m. 14 juni 20u.
+</h3>
+
+<br/>
+
+<h3>
+<u>Winnaar:</u>
+<br/>
+Winnaar is diegene die na de finale op het EK de meeste punten heeft behaald.
+<br/>
+In geval van ex-aequo is de schiftingsvraag van belang: diegene die deze het dichtst benaderde wint.
+<br/>
+De winnaar zal 70% van de inzet ontvangen. De nummers 2 en 3 ontvangen respectievelijk 20% en 10%.
+</h3>
+<br/>
+<h3>
+<u>Score meevolgen:</u>
+<br/>
+Vanaf aanvang van het EK kan u hier dagelijks aangepaste scores en klassementen vinden. 
+<br/>
+Je kan vanaf dat moment de pronostieken van alle deelnemers bekijken.
+</h3>
+<br/>
+<h3>
+<u>Teamklassement</u>
+<br/>
+Aanvullend op het individueel klassement kan je ook deelnemen aan een teamklassement door<br/> bij inschrijving je teamnaam op te geven en op voorwaarde dat je team uit minstens 3 personen bestaat. 
+<br/>
+Per team worden de punten van de 3 beste deelnemers opgeteld. 
+<br/>
+<span style="display:none;">Het beste team dat na de finale op het EK de meeste punten heeft ontvangt een extra prijs: ... 
+<br/>In geval van ex-aequo telt het verschil in schiftingsvraag en vervolgens lottrekking.</span>
+</h3>
+<table width="100%" cellspacing="1" cellpadding="1" border="0">
+<tbody>
+<tr>
+<td align="left">
+
+</td>
+<td valign="bottom" align="right">
+<p style="display:none;">
+<a href="mailto:thomas_vanhuysse@hotmail.com?Subject=EK Prono" target="_top">@</a>
+</p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</fieldset>
+</div>

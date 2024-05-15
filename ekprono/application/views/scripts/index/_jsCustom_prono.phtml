@@ -1,0 +1,146 @@
+<?php
+$this->jQuery()->onLoadCaptureStart(); ?>
+
+    $(document).ready(function() {
+          $(".infoteambox").css({'display' : 'none'});
+    });
+
+    $(document).on("focus", "#team", function() {
+          $(".infoteambox").css({'display' : 'block'});
+     });
+
+      $(document).on("focusout", "#team", function() {
+          $(".infoteambox").css({'display' : 'none'});
+     });
+
+     $(document).on("keyup", ".onlyDecimals", function() {
+          var newValue = $(this).val().replace(/[^0-9\.,]/g,'');
+          $(this).val(newValue);
+     });     
+          
+     $(document).on("focus", ".onlyDecimals,#naam,#email", function() {
+          $(this).css({'background-color' : '#ff0'});
+     });  
+     $(document).on("blur", ".onlyDecimals,#naam,#email", function() {
+          $(this).css({'background-color' : '#fff'});
+     });  
+            
+        
+     $(document).on("click", "#achtstefinales", function(event) {
+	     event.preventDefault();
+	     for (let i = 37; i <= 45; i++) {
+		    if ($("#w"+i+"_1").val()!=''){
+			    $("#"+i+"_1").val( $("#w"+i+"_1").val() );
+		    }
+
+		    if ($("#w"+i+"_2").val()!=''){
+			    $("#"+i+"_2").val( $("#w"+i+"_2").val() );
+		    }
+            ajaxFillNextRound(i);
+            ajaxFillNextRound(i);
+        } 
+
+     });
+
+     // btn_save
+     $(document).on("click", "#btn_save", function(event) {
+     	 event.preventDefault();
+         $("#divLoading").html('<img src="<?php echo $this->baseUrl();?>/base/images/icons/loader_02.gif" /><BR> Loading, please wait...');
+         $("#btn_save").hide();
+         var myForm   =  $(this).closest('form');
+         var formId =  myForm.attr('id');   
+	     var formdata   = $('#'+formId).serialize(); //retrieve all form elements
+         formdata += '&'+$(this).attr('name')+'=1'; //otherwise button is not in data
+     	 $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "<?php echo $this->baseUrl() . '/index/ajax-save-form'; ?>",
+          dataType: "html",         
+          data: {data: formdata },
+          success: function(html){    
+          			var strArray = html.split(":::");   		   		         
+                	if (strArray[0] == '0') { 
+                   		location.href="<?php echo $this->baseUrl() . '/index/deelnemers/msg/1'; ?>";
+                	} 
+                	else {
+                		alert("<?php echo $this->translate('Formuliervalidatie mislukt!');?>"); 
+                		$("#messages").html(strArray[1]);   
+                		$("#btn_save").show();            		  
+                	}                   	                     	
+                	$("#divLoading").html(''); 
+                	          	       
+          		}          		
+          });
+      });  
+        
+      $(document).on("click", ".standing", function(event) {
+     	 event.preventDefault();
+         $("#divLoading2").html('<img src="<?php echo $this->baseUrl();?>/base/images/icons/loader_02.gif" /><BR> Loading, please wait...');
+         var myForm   =  $(this).closest('form');
+         var formId   =  myForm.attr('id');   
+	 var formdata = $('#'+formId).serialize(); 
+         formdata += '&'+$(this).attr('name')+'=1'; 
+     	 $.ajax({
+          type: "POST",
+          dataType: "json",
+          url: "<?php echo $this->baseUrl() . '/index/ajax-get-standing'; ?>",
+          dataType: "html",         
+          data: {data: formdata },
+          success: function(html){   		   		                     	                     	
+                	$("#divLoading2").html(html);      	       
+          		}          		
+          });
+      });  
+      
+      $(".Achtstefinale,.Kwartfinale,.Halvefinale,.Finale").change(function(event) {
+     		event.preventDefault();
+     		var Id = $(this).attr("id");      		
+            var strArray = Id.split("_"); 
+            ajaxFillNextRound(strArray[0]);
+     	}); 
+     	
+     	function ajaxFillNextRound($value) {   
+     		Field1="#"+$value+"_1";	
+     		Field2="#"+$value+"_2";				
+					  $.ajax({
+                        type: "POST",
+                        url: "<?php echo $this->baseUrl() . '/index/ajax-fill-next-round'; ?>",
+                        dataType: "html",
+                        data: {f1: $(Field1).val(), f2: $(Field2).val(), w:$value},
+                        success: function(html){                        	
+                        	var strArray = html.split(":::"); 
+                        	if (strArray[0]=="64_1") {
+                        		$("#63_1").empty().append(strArray[1]);
+                        	}
+                        	if (strArray[0]=="64_2") {
+                        		$("#63_2").empty().append(strArray[1]);
+                        	}
+                            $("#"+strArray[0]).empty().append(strArray[1]);
+                            }
+                       });
+        }  
+        
+        
+
+     	
+     //	function ajaxFillNextRound($value) {   
+     //		Field1="#"+$value+"_1";	
+     //		Field2="#"+$value+"_2";				
+	//				  $.ajax({
+     //                   type: "POST",
+     //                   url: "<?php echo $this->baseUrl() . '/index/ajax-fill-kwartfinale'; ?>",
+    //                   dataType: "html",
+     //                   data: {f1: $(Field1).val(), f2: $(Field2).val(), w:$value},
+    //                   success: function(html){
+    //                   		var strArray = html.split(":::"); 
+   //                         	$(strArray[0]).empty().append(strArray[1]);
+   //                         }
+    //                   });
+   //     }
+        
+        
+        
+        
+<?php 
+$this->jQuery()->onLoadCaptureEnd();
+?>
