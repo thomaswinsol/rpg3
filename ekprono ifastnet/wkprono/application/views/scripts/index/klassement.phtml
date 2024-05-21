@@ -1,0 +1,104 @@
+<style>
+legend {
+  margin-left: 0px;
+}
+</style>
+<?php if (!empty($this->msgid)) {?>
+<div class='msg_ok'><?php echo $this->translate('Bedankt voor je deelname!');?></div>
+<br/>
+<?php }?>
+<?php 
+$ii=0;
+if (!empty($this->result)){
+?>
+
+
+<div style="clear:both;"></div>
+<div style="float:left;margin-left:5%;">
+<br/>
+<img src="<?php echo $this->baseUrl().'/images/albart2.png'; ?>" alt="Logo" width="150">
+<br>
+<fieldset style="margin:2px;text-align:left;padding:2%;background-color:#fff;border:0px solid black;">
+<legend><?php echo $this->translate('Team rangschikking');?></legend>
+<table  class="gridtable" style="width:99%;margin-left:0%;font-size:12px;white-space:nowrap;">
+	<thead>
+	<tr>
+		<th><?php echo $this->translate('Nr'); ?></th>
+		<th><?php echo $this->translate('Team'); ?></th>               
+		<th style="text-align:right;"><?php echo $this->translate('Totaal'); ?></th>
+	</tr>
+	</thead>
+	<tbody>
+        <?php foreach ($this->resultteam as $k=>$v) { ?>
+        <?php $ii++;?>
+        <?php $r['naam']=trim($k)."<p><span style='font-size:9px;'>(".trim($v['naam']).")</span></p>"; ?>
+	<tr>
+		<td align='center'>
+        <?php echo $ii; ?>   
+		</td>
+		<td style="width:290px;">		
+		<?php echo $r['naam']; ?>	
+		</td>
+        <td style="text-align:right;"><?php echo $v['score']; ?>&nbsp;&nbsp;</td>      
+	</tr>	
+        <?php } ?>
+	</tbody>	
+</table>
+</fieldset>
+</div>
+<div class="spelregels1" style="float:right;width:60%;">
+<?php $ii=0; ?>
+<fieldset style="margin:10px;text-align:left;padding:2%;background-color:#fff;border:0px solid black;">
+<legend><?php echo $this->translate('Algemene rangschikking');?></legend>
+<table  class="gridtable" style="width:99%;margin-left:0%;font-size:16px;white-space:nowrap;">
+	<thead>
+	<tr>
+		<th><?php echo $this->translate('Nr'); ?></th>
+		<th><?php echo $this->translate('Naam'); ?></th>               
+		<th style="text-align:right;"><?php echo $this->translate('Totaal'); ?></th>
+                <th style="border:0px solid #fff;background-color:#fff;"></th>
+                <th style="text-align:center;font-size:10px;"><span style="writing-mode: vertical-rl; text-orientation: upright;"><?php echo $this->translate('Poules'); ?></span></th>
+                <th style="text-align:center;font-size:10px;"><span style="writing-mode: vertical-rl; text-orientation: upright;"><?php echo $this->translate('Achtste Finale'); ?></span></th>
+                <th style="text-align:center;font-size:10px;"><span style="writing-mode: vertical-rl; text-orientation: upright;"><?php echo $this->translate('Kwartfinale'); ?></span></th>
+                <th style="text-align:center;font-size:10px;"><span style="writing-mode: vertical-rl; text-orientation: upright;"><?php echo $this->translate('Halve Finale'); ?></span></th>
+                <th style="text-align:center;font-size:10px;"><span style="writing-mode: vertical-rl; text-orientation: upright;"><?php echo $this->translate('Finale'); ?></span></th>
+                <th style="text-align:center;font-size:10px;"><span style="writing-mode: vertical-rl; text-orientation: upright;"><?php echo $this->translate('EK Winnaar'); ?></span></th>
+                <th style="text-align:center;font-size:10px;"><span style="writing-mode: vertical-rl; text-orientation: upright;"><?php echo $this->translate('#Doelpunten'); ?></span></th>
+	</tr>
+	</thead>
+	<tbody>
+        <?php foreach ($this->result as $r) { ?>
+        <?php $ii++;?>
+        <?php $r['naam']=(trim($r['team'])<>'')?trim($r['naam'])." (".trim($r['team']).")":$r['naam']; ?>
+	<tr>
+		<td align='center'>
+                    <?php echo $r['betaald']?$ii:"<font color='red'>".$ii."</font>"; ?>   
+		</td>
+		<td style="width:350px;">
+		<?php if ($this->view) {?>
+                                <?php $img = $this->winner[$r['id']]; ?>        
+                                <?php $img = str_replace("ë","e", $img); ?>
+                                        <img width='18'  src='<?php echo $this->baseUrl()."/images/vlaggen/".trim($img) .".png";?>'>
+					<a href="<?php echo $this->baseUrl();?>/index/detail/id/<?php echo $r['id']; ?>"><?php echo $r['naam']; ?></a>
+                                        <?php echo ($ii==1)?"<img style='margin-top:2px;' src='/ekprono/wkprono/public/images/Soccer-icon1.png'>":"";?> 
+                                        <?php echo ($ii==2)?"<img style='margin-top:2px;' src='/ekprono/wkprono/public/images/Soccer-icon2.png'>":"";?> 
+                                        <?php echo ($ii==3)?"<img style='margin-top:2px;' src='/ekprono/wkprono/public/images/Soccer-icon3.png'>":"";?> 
+		<?php } else {?>        
+                    <?php echo $r['betaald']?$r['naam']:"<font color='red'>".$r['naam']."</font>"; ?>   
+		<?php }?>
+		</td>
+        <td style="text-align:right;"><?php echo round($r['score'],2); ?>&nbsp;&nbsp;</td>
+        <td style="border:0px solid #fff;border-right:1px solid black;">&nbsp;&nbsp;</td>
+        <?php for ($xx=1; $xx<=7; $xx++) { ?>
+        <td style="text-align:right;font-size:11px;width:25px;"><?php echo ((int)$this->finales[$r['id']][$xx]>0)?round($this->finales[$r['id']][$xx],2)."&nbsp;":""; ?></td>
+        <?php } ?>
+	</tr>
+	
+        <?php } ?>
+	</tbody>	
+</table>
+</fieldset>
+</div>
+
+<?php 
+}

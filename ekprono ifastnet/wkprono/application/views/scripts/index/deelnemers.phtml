@@ -1,0 +1,99 @@
+<style>
+.wrapper {
+	line-height: 1.5em;
+	margin: 0 auto;
+	padding: 2em 0 3em;
+	width: 90%;
+	max-width: 2000px;
+	overflow: hidden;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    background: #fff;
+}
+
+th {
+    background-color: #004f9f;
+    font-weight: bold;
+    color: #fff;
+    white-space: nowrap;
+}
+
+td, th {
+    padding: 0.5em 0.5em;
+    text-align: left;
+}
+
+tbody th {
+	background-color: #103cdc;
+}
+tbody tr:nth-child(2n-1) {
+    background-color: #f5f5f5;
+    transition: all .125s ease-in-out;
+}
+tbody tr:hover {
+    background-color: rgba(50,98,149,.3);
+}
+
+td.rank {
+	text-transform: capitalize;
+}
+
+</style>
+<?php if (!empty($this->msgid)) {?>
+<div class='msg_ok'><?php echo $this->translate('Bedankt voor je deelname!');?></div>
+<br/>
+<?php }?>
+<?php 
+$ii=0;
+if (!empty($this->result)){
+?>
+<br/>
+
+<div style="clear:both;"></div>
+<div style="float:left;margin-left:15%;">
+<img src="<?php echo $this->baseUrl().'/images/albart2.png'; ?>" alt="Logo" width="150">
+</div>
+<div class="spelregels1" style="float:right;width:60%;">
+<fieldset style="margin:10px;text-align:left;padding:2%;">
+<legend style="font-size:16px;"><?php echo $this->translate('Deelnemers'); ?></legend>
+
+<div class="deelnemerslijst">
+
+<div class="wrapper">
+<table  style="font-size:16px;">
+	<thead>
+	<tr>
+		<th><?php echo $this->translate('Nr'); ?></th>
+		<th><?php echo $this->translate('Naam'); ?></th>                
+	</tr>
+	</thead>
+	<tbody>
+        <?php foreach ($this->result as $r) { ?>
+        <?php $ii++;?>
+        <?php $r['naam']=(trim($r['team'])<>'')?trim($r['naam'])." (".trim($r['team']).")":$r['naam']; ?>
+	<tr>
+		<td align='center'>
+                    <?php echo $r['betaald']?$ii:"<font color='red'>".$ii."</font>"; ?>   
+		</td>
+		<td class="td<?php echo $r['id']; ?>">
+		<?php if ($this->view) {?>
+					<a href="<?php echo $this->baseUrl();?>/index/detail/id/<?php echo $r['id']; ?>"><?php echo $r['naam']; ?></a>   
+		<?php } else {?>        
+                    <?php echo $r['betaald']?"<img src='/wkprono/public/sign-check-icon.png'>".$r['naam']:"<font color='red'>".$r['naam']."</font>"; ?>   
+		<?php }?>
+		</td>                
+	</tr>
+	
+        <?php } ?>
+	</tbody>	
+</table>
+</div>
+<p><img src='/ekprono/wkprono/public/sign-check-icon.png'> Betaald</p>
+</div>
+</fieldset>
+</div>
+<?php 
+}

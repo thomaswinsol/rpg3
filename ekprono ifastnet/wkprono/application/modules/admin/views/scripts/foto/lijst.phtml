@@ -1,0 +1,48 @@
+<?php
+$this->headLink()->prependStylesheet('/base/js/uploadify/uploadify.css');
+$this->headScript()->prependFile('/base/js/uploadify/swfobject.js')
+		 ->prependFile('/base/js/uploadify/jquery.uploadify.min.js','text/javascript');
+$this->headScript()->captureStart();
+?>
+$(document).ready(function() {
+
+ function initUploadify(elem){
+                $('#'+elem).uploadify({
+                    'uploader'  : '/base/js/uploadify/uploadify.swf',
+                    'script'    : '<?php echo $this->url(array('module'=>'admin', 'controller' => 'foto','action' => 'ajax-upload')); ?>',
+                    'cancelImg' : '/base/js/uploadify/cancel.png',
+                    'folder'    : '/uploads',
+                    'auto'      : true,
+                    'multi'     : true,
+                    'removeCompleted' : true,
+                    'queueSizeLimit' : 99999<?php //echo (3-$totalFiles); ?>,
+                    'buttonText'  : '<?php echo $this->translate('Bijlage toevoegen');?>',
+                    'sizeLimit' : 2097152,
+                    'queueID'   : 'queue1',
+                    'scriptData'  : {},
+                    'onComplete' : function(event,queueID,fileObj,response,data) {
+			var html = response;
+			if (response == 0 || response == ''){
+				alert('File not saved!');
+				return false;
+			}
+                    },
+                    'onError'     : function (event,ID,fileObj,errorObj) {
+                        alert(errorObj.type + ' Error: ' + errorObj.info);
+                    }
+                });
+
+            }
+            initUploadify('orderFiles');
+});
+<?php
+$this->headScript()->captureEnd();
+?>
+
+<?php echo $this->form; ?>
+<div id="filesButtons" style="margin:0;padding:5;">
+     <input id="orderFiles" name="orderFiles" type="file" style="margin:0;padding:0;" />
+</div>
+<?php echo $this->render('_jsCustom_autocomplete.phtml'); ?>
+
+

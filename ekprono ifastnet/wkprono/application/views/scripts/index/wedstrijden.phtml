@@ -1,0 +1,245 @@
+<div class="deelnemers">
+<?php if (!empty($this->id)) {?> 
+	<?php if ($this->id==66) { $ii=0;?>
+	<div class="hoofding" style="width:70%;margin-left:6%;font-size:16px;">Aantal doelpunten:  <?php echo $this->doelpunten;?></div>
+	<table  class="gridtable" style="width:70%;margin-left:6%;font-size:12px;">
+		<thead>
+				<tr>
+					<th>
+						<?php echo $this->translate('Nr'); ?>
+					</th>
+					<th>
+						<?php echo $this->translate('Naam'); ?>
+					</th>   
+					<th>
+						<?php echo $this->translate('Aantal doelpunten'); ?>
+					</th>             
+					<th>
+						<?php echo $this->translate('Punten'); ?>
+					</th>
+				</tr>
+		</thead>
+		<tbody>
+        <?php foreach ($this->result as $r) { ?>
+        		<?php $ii++;?>
+        		<?php 
+        			$saldo= ($r['input1']>=$this->doelpunten)?$r['input1']-$this->doelpunten:$this->doelpunten-$r['input1'];
+        			$punten= 25 - $saldo;
+        			$punten= ($punten<0)?0:$punten;
+        		?>
+				<tr>
+				<td align='center'>
+                    <?php echo $ii; ?>    
+				</td>
+				<td>				
+					<a href="<?php echo $this->baseUrl();?>/index/detail/id/<?php echo $r['id']; ?>">
+					 <?php echo ($punten>0)?"<font color='green'>". $r['naam']."</font>":$r['naam']; ?>   
+					</a>       
+				</td>
+				<td align='center'>
+				
+                    <?php echo ($punten>0)?"<font color='green'>". $r['input1']."</font>":$r['input1']; ?>   
+				</td>
+        		<td align=right>
+        			<?php echo ($punten>0)?"<font color='green'>". $r['score']." [".$punten."]" ."</font>":$r['score']; ?>   
+				</td>
+			</tr>	
+        <?php } ?>
+		</tbody>	
+		</table>
+<?php } else  { ?>
+
+	<?php if (!empty($this->result2)) {?>
+			<?php 
+			$ii=0;
+			$finale=array("9"=>"AchtsteFinale","10"=>"Kwartfinale","11"=>"Halvefinale","12"=>"Troostfinale","13"=>"Finale");
+			?>
+			<div class="hoofding"><?php echo $this->translate($finale[$this->wedstrijd['groep']]);?></div>
+			<br/>
+		<table  class="gridtable" style="width:90%;margin-left:6%;font-size:12px;">
+		<thead>
+				<tr>
+					<th>
+						<?php echo $this->translate('Nr'); ?>
+					</th>
+					<th>
+						<?php echo $this->translate('Naam'); ?>
+					</th>            
+					<th>
+						<?php echo $this->translate('Punten'); ?>
+					</th>
+				</tr>
+		</thead>
+		<tbody>
+        <?php foreach ($this->result2 as $r) { ?>
+        		<?php $ii++;?>
+				<tr>
+				<td align='center'>
+                    <?php echo $ii; ?>    
+				</td>
+				<td>				
+					<a href="<?php echo $this->baseUrl();?>/index/detail/id/<?php echo $r['id']; ?>"><?php echo $r['naam']; ?></a>       
+				</td>
+        		<td align=right>
+                    <?php echo $r['score']; ?>    
+				</td>
+			</tr>	
+        <?php } ?>
+		</tbody>	
+		</table>
+		
+	<?php } else {?>
+	<table style="width:70%;">
+		<tr>
+		<td>
+		<div class='hoofding'><?php echo $this->translate('Wedstrijd'); ?></div>
+		<div class='groep'>
+			<table width='100%' cellspacing='1' cellpadding='1' border='0'>
+			<tr>
+			<td align='right'>
+				<?php echo $this->wedstrijd['thuis'];?>
+                                <?php $img = str_replace("ë","e", $this->wedstrijd['thuis']); ?>
+				<img width='18'  src='<?php echo $this->baseUrl()."/images/vlaggen/".trim($img) .".png";?>'>
+			</td>
+			<td>-</td>
+                        <td>
+                                <?php $img = $this->wedstrijd['uit']; ?>        
+                                <?php $img = str_replace("ë","e", $img); ?>
+				<img width='18'  src='<?php echo $this->baseUrl()."/images/vlaggen/".trim($img) .".png";?>'>
+				<?php echo $img;?>
+			</td>	
+			<td>
+				<?php echo $this->wedstrijd['uitslag'];?>
+			</td>
+			</tr>	
+			</table>
+			<hr>
+			<?php 
+			$ii=0;
+			if (!empty($this->result)){
+			?>
+			<div class="hoofding"><?php echo $this->translate('Algemene rangschikking');?></div>
+			<br/>
+		<table  class="gridtable" style="width:90%;margin-left:6%;font-size:12px;">
+		<thead>
+				<tr>
+					<th>
+						<?php echo $this->translate('Nr'); ?>
+					</th>
+					<th>
+						<?php echo $this->translate('Naam'); ?>
+					</th>   
+					<th>
+						<?php echo $this->translate('Uitslag'); ?>
+					</th>             
+					<th>
+						<?php echo $this->translate('Punten'); ?>
+					</th>
+				</tr>
+		</thead>
+		<tbody>
+        <?php foreach ($this->result as $r) { ?>
+        		<?php $ii++;?>
+				<tr>
+				<td align='center'>
+                    <?php echo $ii; ?>    
+				</td>
+				<td>				
+					<a href="<?php echo $this->baseUrl();?>/index/detail/id/<?php echo $r['id']; ?>"><?php echo $r['naam']; ?></a>       
+				</td>
+				<td align='center'>
+                    <?php echo $r['input1']; ?>  <?php echo ($this->wedstrijd['id']<>52)?"-".$r['input2']:""; ?>   
+				</td>
+        		<td align=right>
+                    <?php echo $r['score']; ?>    
+				</td>
+			</tr>	
+        <?php } ?>
+		</tbody>	
+		</table>
+		<?php } ?>
+	<?php } ?>
+<?php 
+}
+?>
+		</div>
+		</div>	
+		</td>	
+		</tr>
+	</table>
+<?php }  ?>
+<table width="870" cellspacing="5" cellpadding="5" border="0">
+	<tbody>		
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,1,0,0); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,2,0,0); ?>
+		</td>
+		</tr>
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,3,0,0); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,4,0,0); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,5,0,0); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,6,0,0); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,7,0,0); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetGroepsWedstrijden($this->wedstrijden,8,0,0); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td width="50%" valign="top" >
+			<?php echo $this->GetFinaleWedstrijden3($this->wedstrijden,9,0,0); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetFinaleWedstrijden3($this->wedstrijden,10,0,0); ?>
+		</td>
+		</tr>
+		
+		<tr>
+		<td width="50%" valign="top" >
+			<?php echo $this->GetFinaleWedstrijden3($this->wedstrijden,11,0,0); ?>
+		</td>
+		<td width="50%" valign="top">
+			<?php echo $this->GetFinaleWedstrijden3($this->wedstrijden,12,0,0); ?>
+		</td>
+		</tr>
+                
+                <tr>
+		<td width="100%" valign="top" colspan="2">
+			<?php echo $this->GetFinaleWedstrijden3($this->wedstrijden,13,0,0); ?>
+		</td>		
+		</tr>
+
+		<tr>		
+		<td width="100%" valign="top" colspan="2">
+			<div class="hoofding">Aantal doelpunten</div>
+			<div class="groep"><a href="/wkprono/public/index/wedstrijden/id/66/doelpunten/<?php echo $this->AantalDoelpunten; ?>"><font size='5'><?php echo $this->AantalDoelpunten; ?></font></a></td></div>
+		</td>
+		</tr>
+		
+		
+	</tbody>
+</table>
+</div>
+<div id="messages"></div>
+<div id="divLoading"></div>
+

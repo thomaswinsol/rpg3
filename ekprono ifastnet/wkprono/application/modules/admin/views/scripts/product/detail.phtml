@@ -1,0 +1,105 @@
+<h1><?php echo $this->translate("lblProduct"); ?>:</h1>
+
+<div id="productform" style="float:left; width:70%;">
+<?php echo $this->form; ?>
+</div>
+
+<div id="categorieform" >
+<?php
+    if (!empty($this->id)) {
+         echo "<br/>";
+         echo $this->categorieform;
+         ?>
+         <!--- Productcategorie�n ------------------------------------------------------------------->
+         <div style="">
+         <form name="frm_productcategorie" action="/admin/product/deleteproductdetail/" method="post" >
+            <table class="frm_01 frm_02"style="width:32%;margin-left:5px;" border="1" cellpadding="2" cellspacing="0">
+            <thead>
+                <tr style="background-color:lightgray;">
+                    <th style="text-align:center;"></th>
+                    <th style="text-align:center;"><?php echo $this->translate('txtselectiecategorie'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            $counter=0;
+            if (!empty($this->productcategorie)){
+                foreach($this->productcategorie as $p){
+                $counter++;
+		?>
+		<tr>
+                    <td style="width:1%; text-align:center;" nowrap="nowrap">
+                        <input type="checkbox" name="cat[]" value="<?php echo (int)$p['c.id']; ?>" />
+                    </td>
+                    <td>
+                        <?php echo $p['label'];?>
+                    </td>
+		</tr>
+                <?php
+                }
+            }
+            ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                <td align="left"><?php if ($counter>0  ) { ?><input type="image" src="/base/images/icons/btn_delete.gif" id="btn_deletecategorie" name="btn_deletecategorie" alt="Delete" /><?php } ?></td>
+                <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        <input type="hidden" name="productid" value="<?php echo (int)$this->id; ?>" />
+        </form>
+        </div>
+</div>
+<br/><br/><br/>
+<div id="fotoform" >
+         <?php
+         echo "<br/><br/>";
+         echo $this->fotoform;
+         ?>
+         <!--- Productfoto's ----------------------------------------------------------------------->
+         <div style="">
+         <form name="frm_productfotos" action="/admin/product/deleteproductdetail" method="post" >
+            <table class="frm_01 frm_02"style="width:30%;margin-left:5px;" border="1" cellpadding="2" cellspacing="0">
+            <thead>
+                <tr style="background-color:lightgray;">
+                    <th style="text-align:center;"></th>
+                    <th style="text-align:center;"><?php echo $this->translate('txtselectiefoto'); ?></th>
+                </tr>
+            </thead>
+            <tbody>
+            <?php
+            $counter=0;
+            if (!empty($this->productfotos)){
+                foreach($this->productfotos as $p){
+                $counter++;
+		?>
+		<tr>
+                    <td style="width:1%; text-align:center;" nowrap="nowrap">
+                        <input type="checkbox" name="foto[]" value="<?php echo (int)$p['id']; ?>" />
+                    </td>
+                    <td>
+                        <?php echo $this->ToonFoto($p['idfoto']);?>
+                    </td>
+		</tr>
+                <?php
+                }
+            }
+            ?>
+            </tbody>
+            <tfoot>
+                <tr>
+                <td align="left"><?php if ($counter>0  ) { ?><input type="image" src="/base/images/icons/btn_delete.gif" id="btn_deletefoto" name="btn_deletefoto" alt="Delete" /><?php } ?></td>
+                <td></td>
+                </tr>
+            </tfoot>
+        </table>
+        <input type="hidden" name="productid" value="<?php echo (int)$this->id; ?>" />
+        </form>
+        </div>
+</div>
+<?php
+    }
+?>
+
+<?php echo $this->render('product/_jsCustom_product.phtml'); ?>

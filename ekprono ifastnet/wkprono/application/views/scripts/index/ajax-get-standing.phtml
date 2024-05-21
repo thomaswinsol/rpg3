@@ -1,0 +1,130 @@
+<?php 
+         if (!empty($this->result)) {
+         ?>
+	 <?php $array=array(); ?>
+     <?php $array2=array(); ?>
+     <?php $derdes=array(); ?>
+     <?php $derdesqualified=array(); 
+     for ($ii=1; $ii<=6; $ii++) {
+            $counter=1;
+            foreach ($this->result[$ii] as $r) {
+                if ($counter==3) {
+                    $derdes[$ii]=$r;
+                    break;
+                }
+                $counter+=1;
+            }
+     }  
+     array_multisort(array_column($derdes, 'Pts'), SORT_DESC,
+                array_column($derdes, 'GD'),      SORT_DESC,
+                array_column($derdes, 'F'),      SORT_DESC,
+                array_column($derdes, 'W'),      SORT_DESC,
+                $derdes);  
+
+            $counter=1;
+            foreach ($derdes as $d) {
+                if ($counter>4) {
+                    break;
+                }
+                $derdesqualified[$d['id']]=$d['id'];
+                $counter+=1;
+            }
+     ?>
+         <?php $derdes=array(); ?>
+         <?php $derdesgroepen=""; ?>
+         <?php for ($ii=1; $ii<=6; $ii++) { ?>
+                 <?php if ($ii==5) { ?>
+                 <div style="clear:both;"></div>
+                 <?php } ?>
+                 <div style="float:left;margin-right:25px;">
+                 
+                 
+                 <?php
+                 if (!empty($this->result[$ii])) {
+                 ?>
+                 <div class="hoofding">Groep <?php echo $this->groep[$ii-1];?></div>
+                 <table style="width:150px;white-space:nowrap;">
+                 <tr>
+                         <td></td>
+                         <td>Team</td>
+                         <td style="text-align:right;">PTS</td>
+                 </tr>
+                 <?php
+		 $counter=1;	
+                 foreach ($this->result[$ii] as $r) {
+                 ?>
+			<?php 
+            $selected=false;
+            if ($counter<=2) {
+				$key=trim($counter).trim($this->groep[$ii-1]); 
+				$array[$key]=$r['id']; 	
+                $selected=true;
+			} 
+            if ($counter<=3) {
+                $key=trim($counter).trim($this->groep[$ii-1]);
+				$array2[$key]=$r['id']; 	
+			} 
+            if ($counter==3) {
+                if (isset($derdesqualified[$r['id']])){
+                    $selected=true;
+                    $derdes["3".trim($this->groep[$ii-1])]=$r['id'];
+                    $derdesgroepen=trim($derdesgroepen).trim($this->groep[$ii-1]);
+                }
+            }
+            
+            ?>
+                 <tr>
+                         <td>
+                         <?php $img = str_replace("ë","e", $r['Team']);?>
+			                <img width='24' src='/ekprono/wkprono/public/images/vlaggen/<?php echo trim($img);?>.png'">
+                         </td>                      
+                         <td><span style="<?php echo ($selected)?'text-decoration:underline;background-color:#B9D9EB;':''; ?>"><?php echo $r['Team']; ?></span></td>
+                         <td style="text-align:right;"><?php echo $r['Pts']; ?></td>
+                 
+                 </tr>                 
+                 <?php
+			$counter+=1;
+                 } 
+                 ?>
+                 </table>
+                 <?php } ?>
+                 </div>
+          <?php } ?>
+          <?php
+          } 
+          ?>
+
+<div style="display:none;">
+<input type="hidden" id="qualified_derdes" name="qualified_derdes"  value="<?php echo $derdesgroepen; ?>">
+<br/>
+<?php foreach ($derdes as $key=>$d) { ?>
+<input type="hidden" id="<?php echo $key;?>"  name="<?php echo $key;?>" value="<?php echo $d;?>" >
+<br/>
+<?php } ?>
+<?php $result=($this->achtstefinales[trim($derdesgroepen)]); ?>
+<?php foreach ($this->wedstrijden as $w1) { ?>
+<?php foreach ($w1 as $w) { ?>
+<input type="hidden" id="w<?php echo $w['id'];?>_1"  name="w<?php echo $w['id'];?>_1" value="<?php echo isset($array[trim($w['thuis'])])?$array[trim($w['thuis'])]:"";?>" >
+<?php if (trim($w['thuis'])=='1B' || trim($w['thuis'])=='1C' || trim($w['thuis'])=='1E' || trim($w['thuis'])=='1F' ) { ?>
+    <?php $w['thuis']=str_replace("1","w", $w['thuis']); ?>
+    <?php $w['thuis']=strtolower($w['thuis']); ?>
+     <?php $team=$array2[trim($result[trim($w['thuis'])])]; ?>
+    <input type="hidden" id="w<?php echo $w['id'];?>_2"  name="w<?php echo $w['id'];?>_2" value="<?php echo $team;?>" >
+<?php } else {  ?>
+    <input type="hidden" id="w<?php echo $w['id'];?>_2"  name="w<?php echo $w['id'];?>_2" value="<?php echo isset($array[trim($w['uit'])])?$array[trim($w['uit'])]:"";?>" >
+<?php } ?>
+<br/>
+<?php } ?>
+<?php } ?>
+
+
+</div>
+<div style="font-size:12px;">
+<?php if (!empty($array)) { ?>
+Klik <a href="#" id="achtstefinales">hier</a> om de 8ste finales op te vullen.
+<?php } ?>
+</div>
+
+
+
+

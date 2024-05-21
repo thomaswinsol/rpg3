@@ -1,0 +1,11 @@
+<?php
+foreach ($this->container as $page)
+{
+    $class="";
+    if ($page->isActive()) { 
+
+        $class=" class=active ";
+    }
+    echo '<li'. $class. '><a href="' . $page->href . '">' . $this->translate($page->label) . '</a>   |   </li>', PHP_EOL;
+}
+ ?>
